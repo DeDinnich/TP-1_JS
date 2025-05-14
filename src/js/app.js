@@ -75,7 +75,18 @@ btnRestart.addEventListener('click', () => {
 // mise à jour interface
 function updateUI() {
   const q = quiz.getCurrentQuestion();
+  const total = quiz.questions.length;
+  const current = quiz.currentIndex + 1;
+  // mise à jour question/réponses
   renderQuestion(q, selected);
+  // boutons
   btnPrev.style.visibility = quiz.isFirst() ? 'hidden' : 'visible';
-  setActionButton('Valider', selected !== null);
+  setActionButton(answered ? 'Suivant' : 'Valider', selected !== null);
+
+  // mise à jour de la barre de progression
+  const pct = Math.round((current / total) * 100);
+  const bar = document.getElementById('progress-bar');
+  bar.style.width = `${pct}%`;
+  bar.setAttribute('aria-valuenow', pct);
+  bar.textContent = `${current}/${total}`;
 }

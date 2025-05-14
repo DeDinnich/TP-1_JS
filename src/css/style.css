@@ -27,3 +27,8 @@ body {
 #feedback {
   font-weight: bold;
 }
+
+#progress-bar {
+  text-align: center;
+  white-space: nowrap;
+}
