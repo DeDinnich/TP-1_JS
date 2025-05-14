@@ -37,7 +37,6 @@ btnPrev.addEventListener('click', () => {
 // valider / suivant
 btnAction.addEventListener('click', () => {
   const current = quiz.getCurrentQuestion();
-  // si pas encore validée → on valide
   if (!answered) {
     quiz.answerCurrent(selected);
     showFeedback(current.answer, selected);
@@ -47,10 +46,8 @@ btnAction.addEventListener('click', () => {
     fb.textContent = msg;
     answered = true;
     setActionButton('Suivant', true);
-    // masquage du bouton Précédent si on est au début
     btnPrev.style.visibility = 'hidden';
   }
-  // sinon on passe à la question suivante (ou résultat)
   else {
     if (quiz.isLast()) {
       showScreen('screen-result');
@@ -77,9 +74,7 @@ function updateUI() {
   const q = quiz.getCurrentQuestion();
   const total = quiz.questions.length;
   const current = quiz.currentIndex + 1;
-  // mise à jour question/réponses
   renderQuestion(q, selected);
-  // boutons
   btnPrev.style.visibility = quiz.isFirst() ? 'hidden' : 'visible';
   setActionButton(answered ? 'Suivant' : 'Valider', selected !== null);
 
